@@ -1,0 +1,17 @@
+import prisma from "../../config/prisma";
+
+export default async function handler(req, res) {
+	const { nombre, total, pedido, fecha } = req.body;
+	if (req.method === "POST") {
+		const orden = await prisma.orden.create({
+			data: {
+				nombre: nombre,
+				total: total,
+				pedido: pedido,
+				fecha: fecha,
+			},
+		});
+
+		res.json(orden)
+	}
+}
